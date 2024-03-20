@@ -20,7 +20,7 @@ export const Menu = styled("nav", {
   alignItems: "center",
   justifyContent: "space-between",
   background: "$content",
-  padding: "0 10rem",
+  padding: "0 160px",
 });
 
 export const Buttons = styled("div", {

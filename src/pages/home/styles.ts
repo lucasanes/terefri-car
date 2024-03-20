@@ -8,12 +8,11 @@ export const Container = styled("div", {
 
 export const Search = styled("div", {
   width: "100%",
-  padding: "4rem 0",
-  marginLeft: "10rem",
+  padding: "40px 0",
+  marginLeft: "160px",
   display: "flex",
-  gap: "4rem",
+  gap: "40px",
   alignItems: "center",
-  fontSize: "2rem",
 });
 
 export const Filter = styled(Select, {
@@ -29,5 +28,5 @@ export const ButtonSearch = styled(Button, {
   color: "$pallet",
   fontWeight: 500,
   letterSpacing: 1,
-  fontSize: "1rem",
+  fontSize: "16px",
 });
