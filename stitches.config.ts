@@ -18,11 +18,6 @@ export const { theme, styled, css, keyframes, createTheme } = createStitches({
       scrollbar: "#383B41",
       scrollbarThumb: "#5D6069",
     },
-    animations: {
-      linkHover: "opacity(0.7)",
-      buttonHover: "opacity(0.7)",
-      buttonBackgroundHover: "#fff70085",
-    },
   },
   media: {
     sm: "(max-width: 550px)",

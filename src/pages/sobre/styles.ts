@@ -6,8 +6,24 @@ export const Container = styled("div", {
   overflow: "auto",
 });
 
-export const Text = styled("p", {
+export const Body = styled("div", {
   width: "100%",
   fontSize: "18px",
   padding: "40px 160px",
+
+  "@xlg": {
+    padding: "40px 60px",
+  },
+
+  "@sm": {
+    padding: "40px 20px",
+
+    ".tabs div": {
+      flexDirection: "column",
+    },
+  },
+});
+
+export const Text = styled("p", {
+  fontSize: "18px",
 });

@@ -7,12 +7,29 @@ export const Container = styled("div", {
 });
 
 export const Search = styled("div", {
-  width: "100%",
+  width: "fit-content",
   padding: "40px 0",
   marginLeft: "160px",
   display: "flex",
   gap: "40px",
   alignItems: "center",
+
+  "@xlg": {
+    marginLeft: "60px",
+    gap: "20px",
+  },
+
+  "@lg": {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+  },
+
+  "@sm": {
+    marginLeft: 0,
+    width: "100%",
+    gridTemplateColumns: "1fr",
+    justifyItems: "center",
+  },
 });
 
 export const Filter = styled(Select, {

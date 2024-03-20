@@ -1,43 +1,100 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import {
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+} from "@nextui-org/react";
+import { Outlet, useNavigate } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 import * as S from "./styles";
 
 export function AppLayout() {
-  const location = useLocation();
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // const location = useLocation();
   const navigate = useNavigate();
 
   return (
     <S.Container>
-      <S.Menu>
-        <img width={105} height={45} src={logo} alt="logo" />
+      <S.Nav>
+        <NavbarContent>
+          <NavbarBrand>
+            <img width={105} height={45} src={logo} alt="logo" />
+          </NavbarBrand>
+        </NavbarContent>
 
         <S.Buttons>
-          <S.Button1
-            onClick={() => navigate("/")}
-            acitve={location.pathname == "/"}
-            variant={"light"}
-            to={"/"}
-          >
-            Início
-          </S.Button1>
-          <S.Button1
-            onClick={() => navigate("/sobre")}
-            acitve={location.pathname == "/sobre"}
-            variant={"light"}
-            to={"/sobre"}
-          >
-            Sobre Nós
-          </S.Button1>
-          <S.Button1
-            onClick={() => navigate("/contato")}
-            acitve={location.pathname == "/contato"}
-            variant={"light"}
-            to={"/contato"}
-          >
-            Contato
-          </S.Button1>
+          <NavbarItem className="item">
+            <S.Button1
+              onClick={() => navigate("/")}
+              acitve={location.pathname == "/"}
+              variant={"light"}
+              to={"/"}
+            >
+              Início
+            </S.Button1>
+          </NavbarItem>
+          <NavbarItem className="item">
+            <S.Button1
+              onClick={() => navigate("/sobre")}
+              acitve={location.pathname == "/sobre"}
+              variant={"light"}
+              to={"/sobre"}
+            >
+              Sobre Nós
+            </S.Button1>
+          </NavbarItem>
+          <NavbarItem className="item">
+            <S.Button1
+              onClick={() => navigate("/contato")}
+              acitve={location.pathname == "/contato"}
+              variant={"light"}
+              to={"/contato"}
+            >
+              Contato
+            </S.Button1>
+          </NavbarItem>
+
+          <NavbarContent justify="end" className="toggle">
+            <NavbarMenuToggle />
+          </NavbarContent>
         </S.Buttons>
-      </S.Menu>
+
+        <NavbarMenu>
+          <NavbarMenuItem>
+            <S.Button1
+              onClick={() => navigate("/")}
+              acitve={location.pathname == "/"}
+              variant={"light"}
+              to={"/"}
+            >
+              Início
+            </S.Button1>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <S.Button1
+              onClick={() => navigate("/sobre")}
+              acitve={location.pathname == "/sobre"}
+              variant={"light"}
+              to={"/sobre"}
+            >
+              Sobre Nós
+            </S.Button1>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <S.Button1
+              onClick={() => navigate("/contato")}
+              acitve={location.pathname == "/contato"}
+              variant={"light"}
+              to={"/contato"}
+            >
+              Contato
+            </S.Button1>
+          </NavbarMenuItem>
+        </NavbarMenu>
+      </S.Nav>
 
       <S.ContentWrapper>
         <Outlet />

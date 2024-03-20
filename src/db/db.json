@@ -1,0 +1,21 @@
+[
+  {
+    "marca": "",
+    "modelo": "",
+    "preco": 0,
+    "ano": [2000, 2001],
+    "motor": "",
+    "km": 0,
+    "combustivel": "",
+    "cambio": "",
+    "potencia": 150,
+    "portas": 4,
+    "placa": 6,
+    "bluetooth": false,
+    "sensor": "",
+
+    "obs": "",
+
+    "imgs": [""]
+  }
+]
