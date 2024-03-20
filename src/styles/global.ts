@@ -7,6 +7,7 @@ export const GlobalStyles = globalCss({
     margin: 0,
     padding: 0,
     boxSizing: "border-box",
+    fontFamily: "Poppins",
     "::-webkit-scrollbar": {
       backgroundColor: "$scrollbar",
       width: "7px",

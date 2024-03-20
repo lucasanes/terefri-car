@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { styled } from "../../stitches.config";
+import { Button } from "@nextui-org/react";
+import { styled } from "../../../stitches.config";
 
 export const Container = styled("body", {
   width: "100vw",
@@ -10,32 +10,37 @@ export const Container = styled("body", {
 
 export const ContentWrapper = styled("main", {
   width: "100%",
-  height: "100%",
+  height: "calc(100% - 60px)",
 });
 
 export const Menu = styled("nav", {
   width: "100%",
-  minHeight: "6rem",
+  minHeight: "60px",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
   background: "$content",
-  padding: "0 16rem",
+  padding: "0 10rem",
 });
 
 export const Buttons = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  gap: "6rem",
+  gap: "60px",
 });
 
-export const Button = styled(Link, {
-  background: "none",
-  border: "none",
-  fontFamily: "Poppins",
+export const Button1 = styled(Button, {
   fontSize: "20px",
   color: "$hiContrast",
   textTransform: "uppercase",
-  textDecoration: "none",
+  transition: ".3s",
+
+  variants: {
+    acitve: {
+      true: {
+        textShadow: "0 0 6px #FAFF00, 0 0 3px #FAFF00 ",
+      },
+    },
+  },
 });
