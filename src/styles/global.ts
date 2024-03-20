@@ -1,15 +1,12 @@
 import { globalCss } from "@stitches/react";
 
 export const GlobalStyles = globalCss({
-  ":root": {
-    fontSize: "62.5%",
-  },
+  ":root": {},
 
   "*": {
     margin: 0,
     padding: 0,
     boxSizing: "border-box",
-    fontSize: "1.6rem",
     "::-webkit-scrollbar": {
       backgroundColor: "$scrollbar",
       width: "7px",
