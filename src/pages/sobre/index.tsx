@@ -3,7 +3,7 @@ import * as S from "./styles";
 
 export function Sobre() {
   return (
-    <S.Container>
+    <S.Container size={100}>
       <S.Body>
         <S.Text>
           Bem-vindo à Terê-Fri Car, a sua nova opção em Teresópolis de novos e

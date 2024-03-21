@@ -10,7 +10,7 @@ export const Container = styled("div", {
 
 export const ContentWrapper = styled("main", {
   width: "100%",
-  height: "calc(100% - 64px)",
+  height: "100%",
 });
 
 export const Nav = styled(Navbar, {
