@@ -21,9 +21,9 @@ export function GoogleMap() {
         >
           <AdvancedMarker onClick={() => setOpen(true)} position={position}>
             <Pin
-              borderColor={"#ffb700"}
-              background={"#FFE500"}
-              glyphColor={"#ffb700"}
+              borderColor={"#c51b1b"}
+              background={"#ff3131"}
+              glyphColor={"#c51b1b"}
             />
           </AdvancedMarker>
 

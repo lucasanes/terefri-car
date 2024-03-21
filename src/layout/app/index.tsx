@@ -9,16 +9,17 @@ import {
 import { Outlet, useNavigate } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 import * as S from "./styles";
+import { useState } from "react";
 
 export function AppLayout() {
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // const location = useLocation();
   const navigate = useNavigate();
 
   return (
     <S.Container>
-      <S.Nav>
+      <S.Nav isMenuOpen={isMenuOpen}>
         <NavbarContent>
           <NavbarBrand>
             <img width={105} height={45} src={logo} alt="logo" />
@@ -58,14 +59,17 @@ export function AppLayout() {
           </NavbarItem>
 
           <NavbarContent justify="end" className="toggle">
-            <NavbarMenuToggle />
+            <NavbarMenuToggle onClick={() => setIsMenuOpen(!isMenuOpen)} />
           </NavbarContent>
         </S.Buttons>
 
         <NavbarMenu>
           <NavbarMenuItem>
             <S.Button1
-              onClick={() => navigate("/")}
+              onClick={() => {
+                setIsMenuOpen(false);
+                navigate("/");
+              }}
               acitve={location.pathname == "/"}
               variant={"light"}
               to={"/"}
@@ -75,7 +79,10 @@ export function AppLayout() {
           </NavbarMenuItem>
           <NavbarMenuItem>
             <S.Button1
-              onClick={() => navigate("/sobre")}
+              onClick={() => {
+                setIsMenuOpen(false);
+                navigate("/sobre");
+              }}
               acitve={location.pathname == "/sobre"}
               variant={"light"}
               to={"/sobre"}
@@ -85,7 +92,10 @@ export function AppLayout() {
           </NavbarMenuItem>
           <NavbarMenuItem>
             <S.Button1
-              onClick={() => navigate("/contato")}
+              onClick={() => {
+                setIsMenuOpen(false);
+                navigate("/contato");
+              }}
               acitve={location.pathname == "/contato"}
               variant={"light"}
               to={"/contato"}
