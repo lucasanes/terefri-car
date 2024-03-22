@@ -43,7 +43,15 @@ export const Infos = styled("div", {
   gridTemplateColumns: "2fr 1fr",
 
   p: {
-    padding: "0 2rem",
+    padding: "0 20px",
+  },
+
+  "@md": {
+    gridTemplateColumns: "1fr",
+
+    p: {
+      padding: "20px 0",
+    },
   },
 
   b: {
@@ -56,6 +64,10 @@ export const Images = styled("div", {
   gridTemplateColumns: "1fr 1fr",
   padding: "20px 0",
   gap: "30px",
+
+  "@sm": {
+    gridTemplateColumns: "1fr",
+  },
 
   img: {
     transition: "1s",

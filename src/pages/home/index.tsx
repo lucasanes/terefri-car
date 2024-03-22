@@ -1,8 +1,8 @@
 import { SelectItem } from "@nextui-org/react";
 import { get, getDatabase, ref } from "firebase/database";
 import { useEffect, useState } from "react";
+import { app } from "../../../firebaseConfig";
 import { Card } from "../../components/card";
-import { app } from "../../firebaseConfig";
 import { CarType } from "../../types/car";
 import * as S from "./styles";
 
@@ -123,7 +123,7 @@ export function Home() {
   }, [db, marca, modelo, ano]);
 
   return (
-    <S.Container size={100}>
+    <S.Container size={30}>
       <S.Search>
         <S.Filter
           variant="bordered"

@@ -12,12 +12,16 @@ import {
   TableRow,
   useDisclosure,
 } from "@nextui-org/react";
+import { useState } from "react";
 import { FcSearch } from "react-icons/fc";
 import { CarType } from "../../types/car";
+import { ModalImg } from "./component/modalImg";
 import * as S from "./styles";
 
 export function ModalInfos({ car }: { car: CarType }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const [imgSelected, setImgSelected] = useState("");
 
   return (
     <S.Container>
@@ -25,6 +29,8 @@ export function ModalInfos({ car }: { car: CarType }) {
         <FcSearch size={18} />{" "}
         <span style={{ color: "#c4c4c4" }}>Mais informações</span>
       </Button>
+
+      <ModalImg img={imgSelected} setImg={setImgSelected} />
 
       <Modal
         backdrop="blur"
@@ -101,7 +107,13 @@ export function ModalInfos({ car }: { car: CarType }) {
                 </S.Infos>
                 <S.Images>
                   {car.imgs.map((img) => (
-                    <Image key={img} src={img} radius="sm" isZoomed />
+                    <Image
+                      onClick={() => setImgSelected(img)}
+                      key={img}
+                      src={img}
+                      radius="sm"
+                      isZoomed
+                    />
                   ))}
                 </S.Images>
               </S.Body>

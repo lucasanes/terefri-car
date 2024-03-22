@@ -9,7 +9,6 @@ export const Container = styled("div", {
   flexDirection: "column",
   boxShadow: "0 0 15px #000",
   overflow: "hidden",
-
   "@sm": {
     width: "300px",
   },

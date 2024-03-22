@@ -1,11 +1,39 @@
+import { Image, Modal, ModalContent, useDisclosure } from "@nextui-org/react";
+import { useState } from "react";
 import { CarType } from "../../types/car";
 import { ModalInfos } from "../modal";
 import * as S from "./styles";
 
 export function Card({ car }: { car: CarType }) {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const [imgSelected, setImgSelected] = useState("");
+
   return (
     <S.Container>
-      <S.Img radius={"none"} isZoomed src={car.imgs[0]} />
+      <Modal
+        backdrop="blur"
+        size="5xl"
+        placement="top"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <Image onClick={onClose} radius={"none"} src={imgSelected} />
+          )}
+        </ModalContent>
+      </Modal>
+
+      <S.Img
+        onClick={() => {
+          setImgSelected(car.imgs[0]);
+          onOpen();
+        }}
+        radius={"none"}
+        isZoomed
+        src={car.imgs[0]}
+      />
       <S.Body>
         <S.Infos>
           <h1>{car.marca}</h1>
@@ -21,8 +49,25 @@ export function Card({ car }: { car: CarType }) {
           </span>
         </S.Infos>
         <S.Images>
-          <S.Img2 className="img" radius={"none"} isZoomed src={car.imgs[1]} />
-          <S.Img2 radius={"none"} isZoomed src={car.imgs[2]} />
+          <S.Img2
+            onClick={() => {
+              setImgSelected(car.imgs[1]);
+              onOpen();
+            }}
+            className="img"
+            radius={"none"}
+            isZoomed
+            src={car.imgs[1]}
+          />
+          <S.Img2
+            onClick={() => {
+              setImgSelected(car.imgs[2]);
+              onOpen();
+            }}
+            radius={"none"}
+            isZoomed
+            src={car.imgs[2]}
+          />
         </S.Images>
       </S.Body>
       <ModalInfos car={car} />

@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "stitches.config.ts"],
+  "include": ["src", "stitches.config.ts", "firebaseConfig.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
