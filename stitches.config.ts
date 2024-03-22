@@ -7,6 +7,8 @@ export const { theme, styled, css, keyframes, createTheme } = createStitches({
       content: "#212225",
       modal: "#f4f5f6e9",
 
+      border: "#C4C4C4",
+
       hiContrast: "#FFFFFF",
       midContrast: "#EEEEEE",
       loContrast: "#A7A6A6",

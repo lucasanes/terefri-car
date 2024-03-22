@@ -1,9 +1,11 @@
-import { Button, Select } from "@nextui-org/react";
+import { Button, ScrollShadow, Select } from "@nextui-org/react";
 import { styled } from "../../../stitches.config";
 
-export const Container = styled("div", {
+export const Container = styled(ScrollShadow, {
   width: "100vw",
-  height: "100%",
+  height: "calc(100% - 64px)",
+  position: "fixed",
+  overflow: "hidden auto",
 });
 
 export const Search = styled("div", {
@@ -46,4 +48,19 @@ export const ButtonSearch = styled(Button, {
   fontWeight: 500,
   letterSpacing: 1,
   fontSize: "16px",
+  boxShadow: "0 0 15px #000",
+});
+
+export const Body = styled("div", {
+  width: "100%",
+  display: "grid",
+  justifyContent: "center",
+  padding: "0px 60px 40px 60px",
+  gridTemplateColumns: "repeat(auto-fit, minmax(350px, 350px))",
+  gridGap: "40px",
+
+  "@sm": {
+    padding: "0px 20px 40px 20px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 300px))",
+  },
 });

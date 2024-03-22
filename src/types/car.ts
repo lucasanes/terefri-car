@@ -1,15 +1,14 @@
 export interface CarType {
+  active: boolean;
   marca: string;
   modelo: string;
   preco: number;
-  ano: string;
+  ano: number;
   motor: string;
   km: number;
   combustivel: string;
   cambio: string;
-  potencia: number;
   portas: number;
-  placas: number;
   bluetooth: boolean;
   sensor: string;
 

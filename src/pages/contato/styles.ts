@@ -1,6 +1,7 @@
+import { ScrollShadow } from "@nextui-org/react";
 import { styled } from "../../../stitches.config";
 
-export const Container = styled("div", {
+export const Container = styled(ScrollShadow, {
   width: "100%",
   height: "calc(100% - 64px)",
   position: "fixed",

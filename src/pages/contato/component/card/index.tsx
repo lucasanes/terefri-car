@@ -1,12 +1,15 @@
-import { ReactNode } from "react";
+import { Button } from "@nextui-org/react";
+import { MouseEventHandler, ReactNode } from "react";
 import * as S from "./styles";
 
 export function Card({
+  func,
   children,
   title,
   desc,
   response,
 }: {
+  func: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
   title: string;
   desc: string;
@@ -15,8 +18,10 @@ export function Card({
   return (
     <S.Container>
       <div className="header">
-        {children}
-        <h1>{title}</h1>
+        <Button variant="light" onClick={func}>
+          {children}
+          {title}
+        </Button>
       </div>
 
       <div className="infos">

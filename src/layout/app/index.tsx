@@ -1,4 +1,5 @@
 import {
+  Button,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
@@ -6,10 +7,10 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@nextui-org/react";
+import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 import * as S from "./styles";
-import { useState } from "react";
 
 export function AppLayout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,11 +23,21 @@ export function AppLayout() {
       <S.Nav isMenuOpen={isMenuOpen}>
         <NavbarContent>
           <NavbarBrand>
-            <img width={105} height={45} src={logo} alt="logo" />
+            <Button
+              style={{
+                width: "105px",
+                height: "45px",
+                padding: 0,
+                background: "none",
+              }}
+              onPress={() => navigate("/")}
+            >
+              <img width={105} height={45} src={logo} alt="logo" />
+            </Button>
           </NavbarBrand>
         </NavbarContent>
 
-        <S.Buttons>
+        <S.Buttons justify={"end"}>
           <NavbarItem className="item">
             <S.Button1
               onClick={() => navigate("/")}

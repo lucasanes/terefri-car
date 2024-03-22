@@ -1,18 +1,39 @@
 import { SelectItem } from "@nextui-org/react";
+import { get, getDatabase, ref } from "firebase/database";
 import { useEffect, useState } from "react";
-import db from "../../db/db.json";
+import { Card } from "../../components/card";
+import { app } from "../../firebaseConfig";
+import { CarType } from "../../types/car";
 import * as S from "./styles";
 
 export function Home() {
+  const [db, setDb] = useState<Array<CarType>>([]);
+
   const [marca, setMarca] = useState("");
   const [modelo, setModelo] = useState("");
   const [ano, setAno] = useState(0);
 
-  const [marcas, setMarcas] = useState(db);
-  const [modelos, setModelos] = useState(db);
-  const [anos, setAnos] = useState(db);
+  const [marcas, setMarcas] = useState<Array<CarType>>([]);
+  const [modelos, setModelos] = useState<Array<CarType>>([]);
+  const [anos, setAnos] = useState<Array<CarType>>([]);
 
-  const [filters, setFilters] = useState(db);
+  const [filters, setFilters] = useState<Array<CarType>>([]);
+
+  const fetchData = async () => {
+    const dataBase = getDatabase(app);
+    const dataBaseRef = ref(dataBase, "/");
+    const endpoint = await get(dataBaseRef);
+    if (endpoint.exists()) {
+      const array: Array<CarType> = endpoint.val();
+      const actives = array.filter((car) => car.active === true);
+      setDb(actives);
+      setFilters(actives);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   function filter() {
     setFilters(
@@ -27,8 +48,6 @@ export function Home() {
   }
 
   useEffect(() => {
-    console.log(marca, modelo, ano);
-
     setMarcas(() =>
       db.filter((opcao, index) => {
         return db.findIndex((item) => item.marca === opcao.marca) === index;
@@ -48,35 +67,63 @@ export function Home() {
     );
 
     if (marca != "") {
-      setModelos((rest) =>
-        rest.filter(
-          (car) =>
-            car.marca == marca &&
-            rest.findIndex((item) => item.marca == car.marca)
-        )
+      setModelos(() =>
+        db
+          .filter((car) => car.marca == marca)
+          .filter(
+            (car, i, self) =>
+              self.findIndex((item) => item.modelo == car.modelo) == i
+          )
       );
-      setAnos((rest) => rest.filter((car) => car.marca == marca));
+      setAnos(() =>
+        db
+          .filter((car) => car.marca == marca)
+          .filter(
+            (car, i, self) => self.findIndex((item) => item.ano == car.ano) == i
+          )
+      );
     }
 
     if (modelo != "") {
-      setMarcas((rest) => rest.filter((car) => car.modelo == modelo));
-      setAnos((rest) => rest.filter((car) => car.modelo == modelo));
+      setMarcas(() =>
+        db
+          .filter((car) => car.modelo == modelo)
+          .filter(
+            (car, i, self) =>
+              self.findIndex((item) => item.marca == car.marca) == i
+          )
+      );
+      setAnos(() =>
+        db
+          .filter((car) => car.modelo == modelo)
+          .filter(
+            (car, i, self) => self.findIndex((item) => item.ano == car.ano) == i
+          )
+      );
     }
 
     if (ano != 0) {
       setMarcas(() =>
-        db.filter(
-          (car, index) =>
-            car.ano == ano &&
-            db.findIndex((item) => item.ano == car.ano) == index
-        )
+        db
+          .filter((car) => car.ano == ano)
+          .filter(
+            (car, i, self) =>
+              self.findIndex((item) => item.marca == car.marca) == i
+          )
       );
-      setModelos((rest) => rest.filter((car) => car.ano == ano));
+      setModelos(() =>
+        db
+          .filter((car) => car.ano == ano)
+          .filter(
+            (car, i, self) =>
+              self.findIndex((item) => item.modelo == car.modelo) == i
+          )
+      );
     }
-  }, [marca, modelo, ano]);
+  }, [db, marca, modelo, ano]);
 
   return (
-    <S.Container>
+    <S.Container size={100}>
       <S.Search>
         <S.Filter
           variant="bordered"
@@ -84,11 +131,13 @@ export function Home() {
           placeholder="Selecione a marca"
           onChange={(e) => setMarca(e.target.value)}
         >
-          {marcas.map((car) => (
-            <SelectItem key={car.marca} value={car.marca}>
-              {car.marca}
-            </SelectItem>
-          ))}
+          {marcas
+            .sort((a, b) => a.marca.localeCompare(b.marca))
+            .map((car) => (
+              <SelectItem key={car.marca} value={car.marca}>
+                {car.marca}
+              </SelectItem>
+            ))}
         </S.Filter>
 
         <S.Filter
@@ -97,11 +146,13 @@ export function Home() {
           placeholder="Selecione o modelo"
           onChange={(e) => setModelo(e.target.value)}
         >
-          {modelos.map((car) => (
-            <SelectItem key={car.modelo} value={car.modelo}>
-              {car.modelo}
-            </SelectItem>
-          ))}
+          {modelos
+            .sort((a, b) => a.modelo.localeCompare(b.modelo))
+            .map((car) => (
+              <SelectItem key={car.modelo} value={car.modelo}>
+                {car.modelo}
+              </SelectItem>
+            ))}
         </S.Filter>
 
         <S.Filter
@@ -110,17 +161,23 @@ export function Home() {
           placeholder="Selecione o ano"
           onChange={(e) => setAno(Number(e.target.value))}
         >
-          {anos.map((car) => (
-            <SelectItem key={car.ano} value={car.ano}>
-              {car.ano.toString()}
-            </SelectItem>
-          ))}
+          {anos
+            .sort((a, b) => a.ano - b.ano)
+            .map((car) => (
+              <SelectItem key={car.ano} value={car.ano}>
+                {car.ano.toString()}
+              </SelectItem>
+            ))}
         </S.Filter>
 
         <S.ButtonSearch onClick={filter}>PESQUISAR</S.ButtonSearch>
       </S.Search>
 
-      {JSON.stringify(filters)}
+      <S.Body>
+        {filters.map((car, i) => (
+          <Card key={i} car={car} />
+        ))}
+      </S.Body>
     </S.Container>
   );
 }
