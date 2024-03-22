@@ -57,7 +57,7 @@ export function Card({ car }: { car: CarType }) {
             className="img"
             radius={"none"}
             isZoomed
-            src={car.imgs[1]}
+            src={car.imgs[6]}
           />
           <S.Img2
             onClick={() => {
@@ -66,7 +66,7 @@ export function Card({ car }: { car: CarType }) {
             }}
             radius={"none"}
             isZoomed
-            src={car.imgs[2]}
+            src={car.imgs[3]}
           />
         </S.Images>
       </S.Body>
