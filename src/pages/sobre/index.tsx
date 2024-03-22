@@ -1,7 +1,7 @@
 import { Card, CardBody, Tab, Tabs } from "@nextui-org/react";
 import { get, getDatabase, ref } from "firebase/database";
 import React, { useEffect, useState } from "react";
-import { app } from "../../../firebaseConfig";
+import { app } from "../../firebaseConfig";
 import * as S from "./styles";
 
 export function Sobre() {
