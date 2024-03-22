@@ -57,7 +57,7 @@ export function Sobre() {
           </Tab>
           <Tab key="trocas" title="Trocas de Carro">
             <Card>
-              <CardBody>Trocas de Carro: {db[3]}</CardBody>
+              <CardBody>Trocas de Carro: {db[2]}</CardBody>
             </Card>
           </Tab>
         </Tabs>
