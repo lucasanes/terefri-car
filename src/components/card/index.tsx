@@ -14,7 +14,7 @@ export function Card({ car }: { car: CarType }) {
       <Modal
         backdrop="blur"
         size="5xl"
-        placement="top"
+        placement="center"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >

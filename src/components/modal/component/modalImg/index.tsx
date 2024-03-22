@@ -20,7 +20,7 @@ export function ModalImg({
     <Modal
       backdrop="blur"
       size="5xl"
-      placement="top"
+      placement="center"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       onClose={() => setImg("")}

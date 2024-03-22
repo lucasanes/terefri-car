@@ -13,7 +13,6 @@ export function Sobre() {
     const endpoint = await get(dataBaseRef);
     if (endpoint.exists()) {
       const array: Array<string> = endpoint.val();
-      console.log(array);
       setDb(array);
     }
   };
