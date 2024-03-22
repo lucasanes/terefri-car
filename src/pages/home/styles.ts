@@ -9,6 +9,13 @@ export const Container = styled(ReactPullToRefresh, {
   overflow: "hidden auto",
 });
 
+export const Container2 = styled("div", {
+  width: "100vw",
+  height: "calc(100% - 64px)",
+  position: "fixed",
+  overflow: "hidden auto",
+});
+
 export const Search = styled("div", {
   width: "fit-content",
   padding: "40px 0",

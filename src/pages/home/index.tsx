@@ -131,59 +131,61 @@ export function Home() {
 
   return (
     <S.Container onRefresh={fetchData}>
-      <S.Search>
-        <S.Filter
-          variant="bordered"
-          label="Marca"
-          placeholder="Selecione a marca"
-          onChange={(e) => setMarca(e.target.value)}
-        >
-          {marcas
-            .sort((a, b) => a.marca.localeCompare(b.marca))
-            .map((car) => (
-              <SelectItem key={car.marca} value={car.marca}>
-                {car.marca}
-              </SelectItem>
-            ))}
-        </S.Filter>
+      <S.Container2>
+        <S.Search>
+          <S.Filter
+            variant="bordered"
+            label="Marca"
+            placeholder="Selecione a marca"
+            onChange={(e) => setMarca(e.target.value)}
+          >
+            {marcas
+              .sort((a, b) => a.marca.localeCompare(b.marca))
+              .map((car) => (
+                <SelectItem key={car.marca} value={car.marca}>
+                  {car.marca}
+                </SelectItem>
+              ))}
+          </S.Filter>
 
-        <S.Filter
-          variant="bordered"
-          label="Modelo"
-          placeholder="Selecione o modelo"
-          onChange={(e) => setModelo(e.target.value)}
-        >
-          {modelos
-            .sort((a, b) => a.modelo.localeCompare(b.modelo))
-            .map((car) => (
-              <SelectItem key={car.modelo} value={car.modelo}>
-                {car.modelo}
-              </SelectItem>
-            ))}
-        </S.Filter>
+          <S.Filter
+            variant="bordered"
+            label="Modelo"
+            placeholder="Selecione o modelo"
+            onChange={(e) => setModelo(e.target.value)}
+          >
+            {modelos
+              .sort((a, b) => a.modelo.localeCompare(b.modelo))
+              .map((car) => (
+                <SelectItem key={car.modelo} value={car.modelo}>
+                  {car.modelo}
+                </SelectItem>
+              ))}
+          </S.Filter>
 
-        <S.Filter
-          variant="bordered"
-          label="Ano"
-          placeholder="Selecione o ano"
-          onChange={(e) => setAno(Number(e.target.value))}
-        >
-          {anos
-            .sort((a, b) => a.ano - b.ano)
-            .map((car) => (
-              <SelectItem key={car.ano} value={car.ano}>
-                {car.ano.toString()}
-              </SelectItem>
-            ))}
-        </S.Filter>
+          <S.Filter
+            variant="bordered"
+            label="Ano"
+            placeholder="Selecione o ano"
+            onChange={(e) => setAno(Number(e.target.value))}
+          >
+            {anos
+              .sort((a, b) => a.ano - b.ano)
+              .map((car) => (
+                <SelectItem key={car.ano} value={car.ano}>
+                  {car.ano.toString()}
+                </SelectItem>
+              ))}
+          </S.Filter>
 
-        <S.ButtonSearch onClick={filter}>PESQUISAR</S.ButtonSearch>
-      </S.Search>
+          <S.ButtonSearch onClick={filter}>PESQUISAR</S.ButtonSearch>
+        </S.Search>
 
-      <S.Body>
-        {loading && <Spinner size="lg" />}
-        {!loading && filters.map((car, i) => <Card key={i} car={car} />)}
-      </S.Body>
+        <S.Body>
+          {loading && <Spinner size="lg" />}
+          {!loading && filters.map((car, i) => <Card key={i} car={car} />)}
+        </S.Body>
+      </S.Container2>
     </S.Container>
   );
 }
