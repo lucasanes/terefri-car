@@ -1,4 +1,4 @@
-import { SelectItem } from "@nextui-org/react";
+import { SelectItem, Spinner } from "@nextui-org/react";
 import { get, getDatabase, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import { Card } from "../../components/card";
@@ -8,6 +8,8 @@ import * as S from "./styles";
 
 export function Home() {
   const [db, setDb] = useState<Array<CarType>>([]);
+
+  const [loading, setLoading] = useState(true);
 
   const [marca, setMarca] = useState("");
   const [modelo, setModelo] = useState("");
@@ -20,14 +22,19 @@ export function Home() {
   const [filters, setFilters] = useState<Array<CarType>>([]);
 
   const fetchData = async () => {
-    const dataBase = getDatabase(app);
-    const dataBaseRef = ref(dataBase, "/cars");
-    const endpoint = await get(dataBaseRef);
-    if (endpoint.exists()) {
-      const array: Array<CarType> = endpoint.val();
-      const actives = array.filter((car) => car.active === true);
-      setDb(actives);
-      setFilters(actives);
+    try {
+      setLoading(true);
+      const dataBase = getDatabase(app);
+      const dataBaseRef = ref(dataBase, "/cars");
+      const endpoint = await get(dataBaseRef);
+      if (endpoint.exists()) {
+        const array: Array<CarType> = endpoint.val();
+        const actives = array.filter((car) => car.active === true);
+        setDb(actives);
+        setFilters(actives);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -123,7 +130,7 @@ export function Home() {
   }, [db, marca, modelo, ano]);
 
   return (
-    <S.Container size={30}>
+    <S.Container onRefresh={fetchData}>
       <S.Search>
         <S.Filter
           variant="bordered"
@@ -174,9 +181,8 @@ export function Home() {
       </S.Search>
 
       <S.Body>
-        {filters.map((car, i) => (
-          <Card key={i} car={car} />
-        ))}
+        {loading && <Spinner size="lg" />}
+        {!loading && filters.map((car, i) => <Card key={i} car={car} />)}
       </S.Body>
     </S.Container>
   );
