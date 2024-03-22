@@ -21,7 +21,7 @@ export function Home() {
 
   const fetchData = async () => {
     const dataBase = getDatabase(app);
-    const dataBaseRef = ref(dataBase, "/");
+    const dataBaseRef = ref(dataBase, "/cars");
     const endpoint = await get(dataBaseRef);
     if (endpoint.exists()) {
       const array: Array<CarType> = endpoint.val();
