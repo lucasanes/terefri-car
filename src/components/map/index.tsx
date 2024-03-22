@@ -12,7 +12,7 @@ export function GoogleMap() {
   const position = { lat: -22.390304565429688, lng: -42.9517936706543 };
 
   return (
-    <APIProvider apiKey={import.meta.env.VITE_API_KEY}>
+    <APIProvider apiKey={import.meta.env.VITE_API}>
       <div style={{ color: "#000" }} className="map">
         <Map
           defaultZoom={17}
