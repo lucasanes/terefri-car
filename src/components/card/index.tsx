@@ -51,7 +51,7 @@ export function Card({ car }: { car: CarType }) {
         <S.Images>
           <S.Img2
             onClick={() => {
-              setImgSelected(car.imgs[1]);
+              setImgSelected(car.imgs[6]);
               onOpen();
             }}
             className="img"
@@ -61,7 +61,7 @@ export function Card({ car }: { car: CarType }) {
           />
           <S.Img2
             onClick={() => {
-              setImgSelected(car.imgs[2]);
+              setImgSelected(car.imgs[3]);
               onOpen();
             }}
             radius={"none"}
