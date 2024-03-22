@@ -7,7 +7,7 @@ import { Card } from "./component/card";
 import * as S from "./styles";
 
 export function Contato() {
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
     if (scrollRef.current) {
