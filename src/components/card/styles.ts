@@ -76,6 +76,6 @@ export const Images = styled("div", {
   },
 
   img: {
-    height: "100%",
+    height: "128px",
   },
 });

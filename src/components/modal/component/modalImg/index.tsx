@@ -19,7 +19,7 @@ export function ModalImg({
   return (
     <Modal
       backdrop="blur"
-      size="5xl"
+      size="2xl"
       placement="center"
       isOpen={isOpen}
       onOpenChange={onOpenChange}

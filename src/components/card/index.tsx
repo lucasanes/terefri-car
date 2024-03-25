@@ -13,7 +13,7 @@ export function Card({ car }: { car: CarType }) {
     <S.Container>
       <Modal
         backdrop="blur"
-        size="5xl"
+        size="2xl"
         placement="center"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
