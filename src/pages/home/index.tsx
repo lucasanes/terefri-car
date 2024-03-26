@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { SelectItem, Spinner } from "@nextui-org/react";
 import { get, getDatabase, ref } from "firebase/database";
 import { useEffect, useState } from "react";
@@ -30,7 +31,7 @@ export function Home() {
       if (endpoint.exists()) {
         const array: Array<CarType> = endpoint.val();
         const actives = array.filter((car) => car.active === true);
-        setDb(actives);
+        setDb(actives.sort(ordenarAlfabetica));
         setFilters(actives);
       }
     } finally {
@@ -42,15 +43,27 @@ export function Home() {
     fetchData();
   }, []);
 
+  function ordenarAlfabetica(a: CarType, b: CarType) {
+    if (a.marca < b.marca) {
+      return -1;
+    }
+    if (a.marca > b.marca) {
+      return 1;
+    }
+    return 0;
+  }
+
   function filter() {
     setFilters(
-      db.filter((rest) => {
-        return (
-          (!marca || rest.marca === marca) &&
-          (!modelo || rest.modelo === modelo) &&
-          (!ano || rest.ano === ano)
-        );
-      })
+      db
+        .filter((rest) => {
+          return (
+            (!marca || rest.marca === marca) &&
+            (!modelo || rest.modelo === modelo) &&
+            (!ano || rest.ano === ano)
+          );
+        })
+        .sort(ordenarAlfabetica)
     );
   }
 
@@ -72,6 +85,20 @@ export function Home() {
         return db.findIndex((item) => item.ano === opcao.ano) === index;
       })
     );
+
+    if (marca == "" && modelo == "" && ano == 0) {
+      setFilters(
+        db
+          .filter((rest) => {
+            return (
+              (!marca || rest.marca === marca) &&
+              (!modelo || rest.modelo === modelo) &&
+              (!ano || rest.ano === ano)
+            );
+          })
+          .sort(ordenarAlfabetica)
+      );
+    }
 
     if (marca != "") {
       setModelos(() =>

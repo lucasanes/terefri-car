@@ -36,17 +36,21 @@ export function Card({ car }: { car: CarType }) {
       />
       <S.Body>
         <S.Infos>
-          <h1>{car.marca}</h1>
-          <h2>{car.modelo}</h2>
+          <div>
+            <h1>{car.marca}</h1>
+            <h2>{car.modelo}</h2>
+          </div>
 
-          <span>{car.ano}</span>
-          <br />
-          <span className="price">
-            {car.preco.toLocaleString("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            })}
-          </span>
+          <div>
+            <span>{car.ano}</span>
+            <br />
+            <span className="price">
+              {car.preco.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </span>
+          </div>
         </S.Infos>
         <S.Images>
           <S.Img2
@@ -70,7 +74,9 @@ export function Card({ car }: { car: CarType }) {
           />
         </S.Images>
       </S.Body>
-      <ModalInfos car={car} />
+      <div className="footer">
+        <ModalInfos car={car} />
+      </div>
     </S.Container>
   );
 }

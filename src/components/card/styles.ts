@@ -9,6 +9,7 @@ export const Container = styled("div", {
   flexDirection: "column",
   boxShadow: "0 0 15px #000",
   overflow: "hidden",
+
   "@sm": {
     width: "300px",
   },
@@ -22,7 +23,8 @@ export const Img = styled(Image, {
 
 export const Img2 = styled(Image, {
   width: "170px",
-  height: "105px",
+  minHeight: "125px",
+  height: "100%",
   transition: "1s",
 });
 
@@ -36,6 +38,14 @@ export const Body = styled("div", {
 
 export const Infos = styled("div", {
   padding: "45px 20px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  gap: "30px",
+
+  div: {
+    height: "50%",
+  },
 
   h1: {
     fontSize: "24px",
@@ -44,7 +54,6 @@ export const Infos = styled("div", {
 
   h2: {
     fontSize: "18px",
-    marginBottom: "30px",
   },
 
   span: {
@@ -73,9 +82,5 @@ export const Images = styled("div", {
 
   div: {
     height: "100%",
-  },
-
-  img: {
-    height: "128px",
   },
 });
