@@ -30,6 +30,7 @@ export const Img2 = styled(Image, {
 
 export const Body = styled("div", {
   width: "100%",
+  height: "calc(100% - 190px - 48px)",
   borderTop: "2px solid $border",
   borderBottom: "2px solid $border",
   display: "flex",
