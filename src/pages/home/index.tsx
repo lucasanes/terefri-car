@@ -44,6 +44,12 @@ export function Home() {
   }, []);
 
   function ordenarAlfabetica(a: CarType, b: CarType) {
+    if (a.sold && !b.sold) {
+      return 1;
+    }
+    if (!a.sold && b.sold) {
+      return -1;
+    }
     if (a.marca < b.marca) {
       return -1;
     }

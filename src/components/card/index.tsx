@@ -1,5 +1,6 @@
 import { Image, Modal, ModalContent, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
+import Sold from "../../assets/img/sold.png";
 import { CarType } from "../../types/car";
 import { ModalInfos } from "../modal";
 import * as S from "./styles";
@@ -24,6 +25,12 @@ export function Card({ car }: { car: CarType }) {
           )}
         </ModalContent>
       </Modal>
+
+      {car.sold && (
+        <S.Sold>
+          <img src={Sold} />
+        </S.Sold>
+      )}
 
       <S.Img
         onClick={() => {

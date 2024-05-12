@@ -3,6 +3,7 @@ import { styled } from "../../../stitches.config";
 
 export const Container = styled("div", {
   width: "350px",
+  position: "relative",
   borderRadius: "15px",
   background: "$content",
   display: "flex",
@@ -13,6 +14,12 @@ export const Container = styled("div", {
   "@sm": {
     width: "300px",
   },
+});
+
+export const Sold = styled("div", {
+  width: "100%",
+  position: "absolute",
+  zIndex: 15,
 });
 
 export const Img = styled(Image, {

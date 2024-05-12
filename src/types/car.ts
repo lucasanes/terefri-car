@@ -1,5 +1,6 @@
 export interface CarType {
   active: boolean;
+  sold: boolean;
   marca: string;
   modelo: string;
   preco: number;
