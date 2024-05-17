@@ -85,10 +85,6 @@ export function ModalInfos({ car }: { car: CarType }) {
                         <TableCell>Combustível</TableCell>
                         <TableCell>{car.combustivel}</TableCell>
                       </TableRow>
-                      <TableRow key="portas">
-                        <TableCell>Portas</TableCell>
-                        <TableCell>{car.portas}</TableCell>
-                      </TableRow>
                       <TableRow key="bluetooth">
                         <TableCell>Bluetooth</TableCell>
                         <TableCell>{car.bluetooth ? "Sim" : "Não"}</TableCell>
