@@ -1,27 +1,27 @@
-import { Image, Modal, ModalContent, useDisclosure } from "@nextui-org/react";
-import { useState } from "react";
-import Sold from "../../assets/img/sold.png";
-import { CarType } from "../../types/car";
-import { ModalInfos } from "../modal";
-import * as S from "./styles";
+import { Image, Modal, ModalContent, useDisclosure } from '@nextui-org/react';
+import { useState } from 'react';
+import Sold from '../../assets/img/sold.png';
+import { CarType } from '../../types/car';
+import { ModalInfos } from '../modal';
+import * as S from './styles';
 
 export function Card({ car }: { car: CarType }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const [imgSelected, setImgSelected] = useState("");
+  const [imgSelected, setImgSelected] = useState('');
 
   return (
     <S.Container>
       <Modal
-        backdrop="blur"
-        size="2xl"
-        placement="center"
+        backdrop='blur'
+        size='2xl'
+        placement='center'
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
-            <Image onClick={onClose} radius={"none"} src={imgSelected} />
+            <Image onClick={onClose} radius={'none'} src={imgSelected} />
           )}
         </ModalContent>
       </Modal>
@@ -37,10 +37,11 @@ export function Card({ car }: { car: CarType }) {
           setImgSelected(car.imgs[0]);
           onOpen();
         }}
-        radius={"none"}
+        radius={'none'}
         isZoomed
         src={car.imgs[0]}
       />
+
       <S.Body>
         <S.Infos>
           <div>
@@ -51,10 +52,10 @@ export function Card({ car }: { car: CarType }) {
           <div>
             <span>{car.ano}</span>
             <br />
-            <span className="price">
-              {car.preco.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL",
+            <span className='price'>
+              {Number(car.preco).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
               })}
             </span>
           </div>
@@ -65,8 +66,8 @@ export function Card({ car }: { car: CarType }) {
               setImgSelected(car.imgs[6]);
               onOpen();
             }}
-            className="img"
-            radius={"none"}
+            className='img'
+            radius={'none'}
             isZoomed
             src={car.imgs[6]}
           />
@@ -75,13 +76,13 @@ export function Card({ car }: { car: CarType }) {
               setImgSelected(car.imgs[3]);
               onOpen();
             }}
-            radius={"none"}
+            radius={'none'}
             isZoomed
             src={car.imgs[3]}
           />
         </S.Images>
       </S.Body>
-      <div className="footer">
+      <div className='footer'>
         <ModalInfos car={car} />
       </div>
     </S.Container>

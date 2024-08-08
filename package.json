@@ -13,6 +13,7 @@
     "@nextui-org/react": "^2.2.10",
     "@stitches/react": "^1.2.8",
     "@vis.gl/react-google-maps": "^0.8.0",
+    "axios": "^1.7.3",
     "firebase": "^10.9.0",
     "framer-motion": "^11.0.15",
     "google-map-react": "^2.2.1",

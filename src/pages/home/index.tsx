@@ -1,19 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { SelectItem, Spinner } from "@nextui-org/react";
-import { get, getDatabase, ref } from "firebase/database";
-import { useEffect, useState } from "react";
-import { Card } from "../../components/card";
-import { app } from "../../firebaseConfig";
-import { CarType } from "../../types/car";
-import * as S from "./styles";
+import { SelectItem, Spinner } from '@nextui-org/react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Card } from '../../components/card';
+import { CarType, CarTypeStrapi, ImgsData } from '../../types/car';
+import * as S from './styles';
+
+interface StrapiResponse {
+  id: number;
+  attributes: CarTypeStrapi;
+}
 
 export function Home() {
-  const [db, setDb] = useState<Array<CarType>>([]);
+  const [cars, setCars] = useState<Array<CarType>>([]);
 
   const [loading, setLoading] = useState(true);
 
-  const [marca, setMarca] = useState("");
-  const [modelo, setModelo] = useState("");
+  const [marca, setMarca] = useState('');
+  const [modelo, setModelo] = useState('');
   const [ano, setAno] = useState(0);
 
   const [marcas, setMarcas] = useState<Array<CarType>>([]);
@@ -22,22 +26,30 @@ export function Home() {
 
   const [filters, setFilters] = useState<Array<CarType>>([]);
 
-  const fetchData = async () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL_CARS = import.meta.env.VITE_API_URL_CARS;
+
+  async function fetchData() {
     try {
       setLoading(true);
-      const dataBase = getDatabase(app);
-      const dataBaseRef = ref(dataBase, "/cars");
-      const endpoint = await get(dataBaseRef);
-      if (endpoint.exists()) {
-        const array: Array<CarType> = endpoint.val();
-        const actives = array.filter((car) => car.active === true);
-        setDb(actives.sort(ordenarAlfabetica));
-        setFilters(actives);
-      }
+
+      const response = await axios.get(`${API_URL_CARS}`);
+
+      const cars: CarType[] = response.data.data.map((car: StrapiResponse) => {
+        let imgs = [''];
+        if (car.attributes.imgs.data && car.attributes.imgs.data.length > 0) {
+          imgs = car.attributes.imgs.data.map((img: ImgsData) => {
+            return `${API_URL}${img.attributes.url}`;
+          });
+        }
+        return { ...car.attributes, imgs };
+      });
+
+      setCars(cars);
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   useEffect(() => {
     fetchData();
@@ -61,12 +73,12 @@ export function Home() {
 
   function filter() {
     setFilters(
-      db
+      cars
         .filter((rest) => {
           return (
             (!marca || rest.marca === marca) &&
             (!modelo || rest.modelo === modelo) &&
-            (!ano || rest.ano === ano)
+            (!ano || Number(rest.ano) === ano)
           );
         })
         .sort(ordenarAlfabetica)
@@ -75,26 +87,26 @@ export function Home() {
 
   useEffect(() => {
     setMarcas(() =>
-      db.filter((opcao, index) => {
-        return db.findIndex((item) => item.marca === opcao.marca) === index;
+      cars.filter((opcao, index) => {
+        return cars.findIndex((item) => item.marca === opcao.marca) === index;
       })
     );
 
     setModelos(() =>
-      db.filter((opcao, index) => {
-        return db.findIndex((item) => item.modelo === opcao.modelo) === index;
+      cars.filter((opcao, index) => {
+        return cars.findIndex((item) => item.modelo === opcao.modelo) === index;
       })
     );
 
     setAnos(() =>
-      db.filter((opcao, index) => {
-        return db.findIndex((item) => item.ano === opcao.ano) === index;
+      cars.filter((opcao, index) => {
+        return cars.findIndex((item) => item.ano === opcao.ano) === index;
       })
     );
 
-    if (marca == "" && modelo == "" && ano == 0) {
+    if (marca == '' && modelo == '' && ano == 0) {
       setFilters(
-        db
+        cars
           .filter((rest) => {
             return (
               (!marca || rest.marca === marca) &&
@@ -106,9 +118,9 @@ export function Home() {
       );
     }
 
-    if (marca != "") {
+    if (marca != '') {
       setModelos(() =>
-        db
+        cars
           .filter((car) => car.marca == marca)
           .filter(
             (car, i, self) =>
@@ -116,7 +128,7 @@ export function Home() {
           )
       );
       setAnos(() =>
-        db
+        cars
           .filter((car) => car.marca == marca)
           .filter(
             (car, i, self) => self.findIndex((item) => item.ano == car.ano) == i
@@ -124,9 +136,9 @@ export function Home() {
       );
     }
 
-    if (modelo != "") {
+    if (modelo != '') {
       setMarcas(() =>
-        db
+        cars
           .filter((car) => car.modelo == modelo)
           .filter(
             (car, i, self) =>
@@ -134,7 +146,7 @@ export function Home() {
           )
       );
       setAnos(() =>
-        db
+        cars
           .filter((car) => car.modelo == modelo)
           .filter(
             (car, i, self) => self.findIndex((item) => item.ano == car.ano) == i
@@ -144,31 +156,31 @@ export function Home() {
 
     if (ano != 0) {
       setMarcas(() =>
-        db
-          .filter((car) => car.ano == ano)
+        cars
+          .filter((car) => Number(car.ano) == ano)
           .filter(
             (car, i, self) =>
               self.findIndex((item) => item.marca == car.marca) == i
           )
       );
       setModelos(() =>
-        db
-          .filter((car) => car.ano == ano)
+        cars
+          .filter((car) => Number(car.ano) == ano)
           .filter(
             (car, i, self) =>
               self.findIndex((item) => item.modelo == car.modelo) == i
           )
       );
     }
-  }, [db, marca, modelo, ano]);
+  }, [cars, marca, modelo, ano]);
 
   return (
     <S.Container>
       <S.Search>
         <S.Filter
-          variant="bordered"
-          label="Marca"
-          placeholder="Selecione a marca"
+          variant='bordered'
+          label='Marca'
+          placeholder='Selecione a marca'
           onChange={(e) => setMarca(e.target.value)}
         >
           {marcas
@@ -181,9 +193,9 @@ export function Home() {
         </S.Filter>
 
         <S.Filter
-          variant="bordered"
-          label="Modelo"
-          placeholder="Selecione o modelo"
+          variant='bordered'
+          label='Modelo'
+          placeholder='Selecione o modelo'
           onChange={(e) => setModelo(e.target.value)}
         >
           {modelos
@@ -196,13 +208,13 @@ export function Home() {
         </S.Filter>
 
         <S.Filter
-          variant="bordered"
-          label="Ano"
-          placeholder="Selecione o ano"
+          variant='bordered'
+          label='Ano'
+          placeholder='Selecione o ano'
           onChange={(e) => setAno(Number(e.target.value))}
         >
           {anos
-            .sort((a, b) => a.ano - b.ano)
+            .sort((a, b) => Number(a.ano) - Number(b.ano))
             .map((car) => (
               <SelectItem key={car.ano} value={car.ano}>
                 {car.ano.toString()}
@@ -214,7 +226,7 @@ export function Home() {
       </S.Search>
 
       <S.Body>
-        {loading && <Spinner size="lg" />}
+        {loading && <Spinner size='lg' />}
         {!loading && filters.map((car, i) => <Card key={i} car={car} />)}
       </S.Body>
     </S.Container>
