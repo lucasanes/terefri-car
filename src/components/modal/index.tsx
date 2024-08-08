@@ -11,31 +11,31 @@ import {
   TableHeader,
   TableRow,
   useDisclosure,
-} from "@nextui-org/react";
-import { useState } from "react";
-import { FcSearch } from "react-icons/fc";
-import { CarType } from "../../types/car";
-import { ModalImg } from "./component/modalImg";
-import * as S from "./styles";
+} from '@nextui-org/react';
+import { useState } from 'react';
+import { FcSearch } from 'react-icons/fc';
+import { CarType } from '../../types/car';
+import { ModalImg } from './component/modalImg';
+import * as S from './styles';
 
 export function ModalInfos({ car }: { car: CarType }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const [imgSelected, setImgSelected] = useState("");
+  const [imgSelected, setImgSelected] = useState('');
 
   return (
     <S.Container>
-      <Button onPress={onOpen} size="lg" radius="none" variant="light">
-        <FcSearch size={18} />{" "}
-        <span style={{ color: "#c4c4c4" }}>Mais informações</span>
+      <Button onPress={onOpen} size='lg' radius='none' variant='light'>
+        <FcSearch size={18} />{' '}
+        <span style={{ color: '#c4c4c4' }}>Mais informações</span>
       </Button>
 
       <ModalImg img={imgSelected} setImg={setImgSelected} />
 
       <Modal
-        backdrop="blur"
-        size="5xl"
-        placement="top"
+        backdrop='blur'
+        size='5xl'
+        placement='top'
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
@@ -56,40 +56,40 @@ export function ModalInfos({ car }: { car: CarType }) {
                       <TableColumn>VALUE</TableColumn>
                     </TableHeader>
                     <TableBody>
-                      <TableRow key="preco">
+                      <TableRow key='preco'>
                         <TableCell>Preço</TableCell>
                         <TableCell>
-                          {car.preco.toLocaleString("pt-BR", {
-                            style: "currency",
-                            currency: "BRL",
+                          {Number(car.preco).toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL',
                           })}
                         </TableCell>
                       </TableRow>
-                      <TableRow key="km">
+                      <TableRow key='km'>
                         <TableCell>KM</TableCell>
                         <TableCell>
                           {car.km
                             .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
                         </TableCell>
                       </TableRow>
-                      <TableRow key="motor">
+                      <TableRow key='motor'>
                         <TableCell>Motor</TableCell>
                         <TableCell>{car.motor}</TableCell>
                       </TableRow>
-                      <TableRow key="cambio">
+                      <TableRow key='cambio'>
                         <TableCell>Câmbio</TableCell>
                         <TableCell>{car.cambio}</TableCell>
                       </TableRow>
-                      <TableRow key="combustivel">
+                      <TableRow key='combustivel'>
                         <TableCell>Combustível</TableCell>
                         <TableCell>{car.combustivel}</TableCell>
                       </TableRow>
-                      <TableRow key="bluetooth">
+                      <TableRow key='bluetooth'>
                         <TableCell>Bluetooth</TableCell>
-                        <TableCell>{car.bluetooth ? "Sim" : "Não"}</TableCell>
+                        <TableCell>{car.bluetooth ? 'Sim' : 'Não'}</TableCell>
                       </TableRow>
-                      <TableRow key="sensor">
+                      <TableRow key='sensor'>
                         <TableCell>Sensor de Estacionamento</TableCell>
                         <TableCell>{car.sensor}</TableCell>
                       </TableRow>
@@ -107,14 +107,14 @@ export function ModalInfos({ car }: { car: CarType }) {
                       onClick={() => setImgSelected(img)}
                       key={img}
                       src={img}
-                      radius="sm"
+                      radius='sm'
                       isZoomed
                     />
                   ))}
                 </S.Images>
               </S.Body>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button color='danger' variant='light' onPress={onClose}>
                   Close
                 </Button>
               </ModalFooter>
